@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* Global: remove heavy animated gradient & blur to improve paint performance */
+html,
+body,
+#root {
+    height: 100%;
+    background: linear-gradient(180deg, #f8fafc, #eef2ff);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Simpler card shadows and no heavy backdrop blur */
+.meme-thumb {
+    @apply rounded-md object-cover bg-gray-100;
+}
+
+/* Softer shadows (cheaper) */
+.shadow-card {
+    box-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
+}
+
+.shadow-item {
+    box-shadow: 0 4px 10px rgba(2, 6, 23, 0.04);
+}
+
+/* avoid CSS backdrop-filter (expensive) */
+.backdrop-blur {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* reduce animation load: only use transform and opacity */
+.hover-lift {
+    transition: transform .18s ease, box-shadow .18s ease;
+    will-change: transform;
+}
+
+/* skeleton simplified */
+.skel {
+    background: linear-gradient(90deg, #f1f5f9, #e9eef7, #f1f5f9);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s linear infinite;
+    border-radius: 8px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* accessibility focus */
+:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
